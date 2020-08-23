@@ -1,24 +1,22 @@
 // app.js
 
 // TODO: create a server that can accept an image and return 9 images to automate the image-splitting process
+// TODO: make more puzzles
+// TODO: add a scoring system
+// TODO: add a done state
+// TODO: add tips and techniques
 
 
-const SPACE_ID = '5g4h2poikwrg'
+const SPACE_ID = '4hljq5yupat1'
 const ENVIRONMENT = 'master'
-const ASSETS = [
-  '01J3demBXdMBI9OX5VDjrN',
-  '33Pn0NR8gIw0i2tx6Oucx5',
-  '3tvvgB4ELUlFk6fAvBnz8O',
-  '3MBmcKA6MOXzM9RmGQjuVi'
-]
-const DELIVERY_ACCESS_TOKEN = 'gLNzglwL1W28CgIDcJRtop4-iEAQcQ2R8uOMB6tH154'
+const DELIVERY_ACCESS_TOKEN = 'V7y3zuvPVN69aMnM1v1AYoWL8-0BEsc3ewmaT66Yufg'
 const PUZZLE_SUMMER_NATURE_ENTRY_ID = '3KIVnxizuTjfGs4KOsrGH1'
 
 const state = {
   puzzle: {
     numColumns: 0,
     numRows: 0,
-    goalImage: 'data:;base64,',
+    goalImage: undefined,
     imagePieces: [],
     currOrder: []
   }
@@ -55,13 +53,6 @@ const movePiece = (e) => {
   }
 }
 
-
-// sample src = "https://images.ctfassets.net/5g4h2poikwrg/01J3demBXdMBI9OX5VDjrN/2a6788e136ac53459e66d9391f42532c/nature-1370825-639x573.jpg"
-const setImageSrc = (id, src) => {
-  const imgPuzzleGoal = document.getElementById(id)
-  imgPuzzleGoal.src = src
-}
-
 const shuffleArray = (originalArray) => {
   const array = [...originalArray]
   for (let index = array.length - 1; index > 0; index--) {
@@ -90,22 +81,49 @@ const loadPuzzle = (name, numColumns, numRows, goalImage, imagePieces) => {
 }
 
 const fetchPuzzle = (accessToken, spaceID, environment, entryID) => {
-  console.log('fetching puzzle...')
-  const client = contentful.createClient({
-    space: spaceID,
-    environment,
-    accessToken
-  })
-  return client.getEntry(PUZZLE_SUMMER_NATURE_ENTRY_ID)
-    .then(({
-      fields: {
-        name, 
+  const URL = `https://graphql.contentful.com/content/v1/spaces/${spaceID}/environments/${environment}`
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      query: `{
+        puzzle(id: "${entryID}") {
+          name
+          numberOfRows
+          numberOfColumns
+          wholeImage {
+            url
+            width
+            height
+          }
+          imagePiecesCollection {
+            items {
+              url
+              width
+              height
+            }
+          }
+        }
+      }`
+    })
+  }
+  
+  return fetch(URL, options)
+    .then(response => response.json())
+    .then(jsonData => {
+      const {
+        name,
         numberOfColumns: numColumns,
         numberOfRows: numRows,
         wholeImage: goalImage,
-        imagePieces
-      }
-    }) => ({ name, numColumns, numRows, goalImage, imagePieces }))
+        imagePiecesCollection: { items: imagePieces }
+      } = jsonData.data.puzzle
+      return ({ name, numColumns, numRows, goalImage, imagePieces })
+    })
+    .catch(console.error)
 }
 
 const update = (tick) => {}
@@ -113,22 +131,23 @@ const update = (tick) => {}
 const draw = (tick) => {
   const goalImage = document.getElementById('puzzle-goal')
   if (typeof state.puzzle.goalImage === 'object' && 
-    state.puzzle.goalImage.fields.file.url !== goalImage.src) {
-      goalImage.src = state.puzzle.goalImage.fields.file.url
+    state.puzzle.goalImage.url !== goalImage.src) {
+      const { url, width, height } = state.puzzle.goalImage
+      goalImage.src = url
+      goalImage.width = width
+      goalImage.height = height
   }
   const maxValue = state.puzzle.numColumns * state.puzzle.numRows
   state.puzzle.currOrder.forEach((orderIndex, index) => {
     const image = document.getElementById(`puzzle-piece-${index + 1}`)
     const piece = state.puzzle.imagePieces[orderIndex - 1]
-    image.src = piece.fields.file.url
-    image.width = piece.fields.file.details.image.width
-    image.height = piece.fields.file.details.image.height
+    image.src = piece.url
+    image.width = piece.width
+    image.height = piece.height
     if (orderIndex === maxValue)
       image.style.visibility = 'hidden'
     else
-      image.style.visibility = 'visible'
-    
-    // setImageSrc(`puzzle-piece-${index + 1}`, orderIndex === maxValue ? '' : state.puzzle.imagePieces[orderIndex - 1].fields.file.url)
+      image.style.visibility = 'visible'    
   })
 }
 
@@ -145,7 +164,7 @@ const init = () => {
     .then(({ name, numColumns, numRows, goalImage, imagePieces })  => {
       loadPuzzle(name, numColumns, numRows, goalImage, imagePieces)
     })
-  
+
   requestAnimationFrame(loop)
 }
 

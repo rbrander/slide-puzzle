@@ -1,0 +1,63 @@
+{
+  "data": {
+    "puzzle": {
+      "name": "Summer Nature",
+      "numberOfRows": 3,
+      "numberOfColumns": 3,
+      "wholeImage": {
+        "url": "https://images.ctfassets.net/4hljq5yupat1/4N1tFSt1ek820OMG7nySH6/fe8ba48f6548d71da776656f5e60d50a/Summer_Nature.jpg",
+        "width": 480,
+        "height": 480
+      },
+      "imagePiecesCollection": {
+        "items": [
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/1UBslsrgIj2qJUjIRTmpdu/40b9f0cde27537f2aaa8434bdb3b643d/9.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/Gq9BkMGjwNWF2C7lEe90L/88041f371f4b30423d1e298d2cbb53d4/8.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/4FM0U7JoUx90FNo0T4ssJ1/c4f2464a65ed06558d8770ddf7ddd065/7.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/3yWEHtS4HFm9I2KSHvi1pF/b0c14f51745132db80cb2e85126d1e6d/6.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/60eukPuzVCWCqq1qecLsxY/19c6f1c024189e8f4943e608e83e45c2/5.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/7fDU3zsaMJ9EegOj9pNMJa/09338ef5c48bc2bc758227980c3e367a/4.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/4yRo5f0timTR5d0nIFQUXk/ec7a077d8c205308e7d35ea8a51abc6b/3.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/FmqzZGJC4xsZgrDFvUJo0/ef96781363c1d33a4a5c6f575f090bf1/2.jpg",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "url": "https://images.ctfassets.net/4hljq5yupat1/1DOPERxYpGYDblePvbkKOV/b807420ed472df38982a21a6605efac2/1.jpg",
+            "width": 160,
+            "height": 160
+          }
+        ]
+      }
+    }
+  }
+}
