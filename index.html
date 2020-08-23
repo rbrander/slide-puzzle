@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Slide Puzzle</title>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="data:;base64,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-css-reset/dist/reset.min.css" />
+  <style>
+    body { font-family: sans-serif; }
+    img { border: 1px solid black; display: inline-block; }
+    .pieces { display: inline-block; }
+    .piece-row { margin: 0; padding: 0;  }
+  </style>
+</head>
+<body>
+  <h1>Slide Puzzle</h1>
+  <h3 id="puzzle-name"></h3>
+  <div>
+    <img id="puzzle-goal" alt="Puzzle Goal" style="vertical-align: top" />
+    <div class="pieces">
+      <div class="piece-row">
+        <img id="puzzle-piece-1" alt="Piece 1" onclick="movePiece(event)"/>
+        <img id="puzzle-piece-2" alt="Piece 2" onclick="movePiece(event)"/>
+        <img id="puzzle-piece-3" alt="Piece 3" onclick="movePiece(event)"/>
+      </div>
+      <div class="piece-row">
+        <img id="puzzle-piece-4" alt="Piece 4" onclick="movePiece(event)" />
+        <img id="puzzle-piece-5" alt="Piece 5" onclick="movePiece(event)" />
+        <img id="puzzle-piece-6" alt="Piece 6" onclick="movePiece(event)" />
+      </div>
+      <div class="piece-row">
+        <img id="puzzle-piece-7" alt="Piece 7" onclick="movePiece(event)" />
+        <img id="puzzle-piece-8" alt="Piece 8" onclick="movePiece(event)" />
+        <img id="puzzle-piece-9" alt="Piece 9" onclick="movePiece(event)" />
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+  <script type="text/javascript" src="./app.js" defer="true"></script>
+</body>
+</html>
