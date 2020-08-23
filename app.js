@@ -5,7 +5,8 @@
 // TODO: add a scoring system
 // TODO: add a done state
 // TODO: add tips and techniques
-
+// TODO: dynamically generic the markup based on puzzle size
+// TODO: create a puzzle other than 3x3
 
 const SPACE_ID = '4hljq5yupat1'
 const ENVIRONMENT = 'master'
