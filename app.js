@@ -78,7 +78,8 @@ const loadPuzzle = (name, numColumns, numRows, goalImage, imagePieces) => {
     goalImage,
     imagePieces,
     currOrder: shuffleArray(new Array(numColumns * numRows).fill().map((_, i) => i + 1))
-  })  
+  })
+  document.getElementById('puzzle-name').innerText = name
 }
 
 const fetchPuzzle = (accessToken, spaceID, environment, entryID) => {

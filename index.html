@@ -11,15 +11,24 @@
       display: inline-block;
       margin: -3px
     }
-    .pieces { display: inline-block; }
+    .goal-image {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+    }
+    .pieces { display: inline-block; vertical-align: top; }
     .piece-row { margin: 0; padding: 0;  }
   </style>
 </head>
 <body>
   <h1>Slide Puzzle</h1>
-  <h3 id="puzzle-name"></h3>
+  <p>Move the pieces around by clicking on them.  The pieces will swap places with the blank space if it is directly beside it.  The goal is to move the pieces to match the goal image. </p>
+  <h2 id="puzzle-name"></h2>
   <div>
-    <img id="puzzle-goal" alt="Puzzle Goal" style="vertical-align: top" />
+    <div class="goal-image">
+      <img id="puzzle-goal" alt="Puzzle Goal" />
+      <div>Goal Image</div>
+    </div>
     <div class="pieces">
       <div class="piece-row">
         <img id="puzzle-piece-1" alt="Piece 1" onclick="movePiece(event)"/>
@@ -36,6 +45,7 @@
         <img id="puzzle-piece-8" alt="Piece 8" onclick="movePiece(event)" />
         <img id="puzzle-piece-9" alt="Piece 9" onclick="movePiece(event)" />
       </div>
+      <div>Your Pieces</div>
     </div>
   </div>
   <script type="text/javascript" src="./app.js" defer="true"></script>
